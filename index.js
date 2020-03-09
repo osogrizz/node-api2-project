@@ -20,7 +20,7 @@ server.post('/api/posts', (req, res) => {
     console.log(err)
   })
 })
-
+// Get all posts.
 server.get('/api/posts', (req, res) => {
   Posts.find()
   .then(posts => {
@@ -31,11 +31,25 @@ server.get('/api/posts', (req, res) => {
   })
 })
 
+// Get an individual post by id.
 server.get('/api/posts/:id', (req, res) => {
   const id = req.params.id
   Posts.findById(id)
   .then( post => {
     res.status(200).json(post)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+// Get all comments for an individual post.
+server.get('/api/posts/:id/comments', (req, res) => {
+  const id = req.params.id
+
+  Posts.findPostComments(id)
+  .then(comments => {
+    res.status(200).json(comments)
   })
   .catch(err => {
     console.log(err)
