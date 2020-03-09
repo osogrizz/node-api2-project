@@ -14,6 +14,17 @@ server.post('/api/posts', (req,res) => {
   Posts.insert(postData)
   .then( post => {
     res.status(201).json(post)
+
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+server.get('/api/posts', (req,res) => {
+  Posts.find()
+  .then(posts => {
+    res.status(200).json(posts)
   })
   .catch(err => {
     console.log(err)
